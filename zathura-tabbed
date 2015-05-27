@@ -11,6 +11,8 @@
 #
 # This command will open file.pdf in tabbed named tabname. It this tabbed
 # window does not exists, it will be created.
+# If tabname is not given, the name of the tab will be tabbed (default value of
+# tabbed)
 
 if [ "$#" -ne 2 ]; then
     XID=`wmctrl -lx | grep " tabbed\.tabbed " | cut -f 1 -d " "`
