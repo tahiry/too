@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# This scripts is used to automatically open zathura insed tab. It depends on :
+#   - tabbed (http://tools.suckless.org/tabbed/)
+#   - wmctrl (https://sites.google.com/site/tstyblo/wmctrl/)
+# This two program should be available in your package manager.
+# This program is teste to work with awesome window manager.
+#
+# USAGE:
+#   zathura-tabbed file.pdf tabname
+#
+# This command will open file.pdf in tabbed named tabname. It this tabbed
+# window does not exists, it will be created.
+
+if [ "$#" -ne 2 ]; then
+    XID=`wmctrl -lx | grep " tabbed\.tabbed " | cut -f 1 -d " "`
+else
+    XID=`wmctrl -lx | grep " $2\.tabbed " | cut -f 1 -d " "`
+fi
+
+if [ -z "${XID}" ];
+then
+    echo "No instance"
+    if [ -z $2 ]; then
+        tabbed -c zathura "$1" -e &
+    else
+        tabbed -c -n $2 zathura "$1" -e &
+    fi
+else
+    zathura -e ${XID} "$1" &
+fi
