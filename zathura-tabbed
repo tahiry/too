@@ -22,7 +22,6 @@ fi
 
 if [ -z "${XID}" ];
 then
-    echo "No instance"
     if [ -z $2 ]; then
         tabbed -c zathura "$1" -e &
     else
